@@ -6,15 +6,17 @@ class GameField
 	sf::Vector2i size;	//Размер игрового поля
 	vector<Block*> block;	//Статические блоки
 	vector<Block*> activeBlock;	//Активные блоки
-	int figureType;	//Тип текущей фигуры
-	int activeBlockNumber;	//Число активных блоков
+	int figureType = 0;	//Тип текущей фигуры
+	int activeBlockNumber = 0;	//Число активных блоков
 
 	sf::Texture texture;
+	sf::Texture tex_Block;
 	sf::RectangleShape rect;
 
 public:
 	GameField(sf::Vector2i _size) : size(_size)
 	{
+		tex_Block.loadFromFile("Data/textures/block_1.png");
 		texture.loadFromFile("Data/textures/fieldBorder.png");
 		rect.setSize(sf::Vector2f(277, 502));
 		rect.setTexture(&texture);
@@ -30,13 +32,12 @@ public:
 
 	//Get
 	sf::Vector2i getFieldSize() { return size; }
-	vector<Block*>* getBlocks() { return &block; }
 	int getActiveBlockNumber() { return activeBlockNumber; }
 
 	//Создание блока
 	void addBlock(sf::Vector2i _pos)
 	{
-		activeBlock.push_back(new Block(_pos));
+		activeBlock.push_back(new Block(_pos, &tex_Block));
 	}
 
 	//Удаление блока
@@ -45,6 +46,7 @@ public:
 		for (Block* b : block)
 			if (b->getPosition() == _pos)
 			{
+				delete b;
 				block.erase(remove(block.begin(), block.end(), b));
 				break;
 			}

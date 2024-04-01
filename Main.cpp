@@ -3,6 +3,7 @@
 //Классы
 #include "GameField.h"
 #include "InformBlock.h"
+#include "GlobalVariables.h"
 
 GameField gameField(sf::Vector2i(11, 20));
 InformBlock informBlock;

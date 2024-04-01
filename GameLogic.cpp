@@ -89,9 +89,7 @@ void createFigure(GameField* gameField, InformBlock* infoBlock, int* gameState)
 {
 	int activeBlocks = 0;
 	vector<sf::Vector2i> newBlocks;
-	//Тип фигуры
-	int pattern = infoBlock->getNextFigure();
-	generateFigure(pattern, &newBlocks);
+	generateFigure(infoBlock->getNextFigure(), &newBlocks);
 	activeBlocks = newBlocks.size();
 	for (sf::Vector2i b : newBlocks)
 	{
@@ -106,7 +104,7 @@ void createFigure(GameField* gameField, InformBlock* infoBlock, int* gameState)
 	//А если можно - размещаем фигуру на поле
 	for (sf::Vector2i b : newBlocks)
 		gameField->addBlock(b);
-	gameField->setFigureType(pattern, activeBlocks);
+	gameField->setFigureType(infoBlock->getNextFigure(), activeBlocks);
 
 	//Устанавливаем тип следующшей фигуры
 	int nextPattern = rand() % 14;

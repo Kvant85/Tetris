@@ -9,12 +9,15 @@ class InformBlock
 	Caption titleText, infoText, looseText, winText;
 	int nextFigureType;	//Тип следующей фигуры
 	vector<Block*> nextBlock;	//Блоки следующей фигуры
+	sf::Texture tex_Block;
 
 public:
 	InformBlock()
 	{
 		srand(std::time(nullptr));
 		nextFigureType = rand() % 14;
+
+		tex_Block.loadFromFile("Data/textures/block_1.png");
 
 		//Рамка фигуры
 		frameTex.loadFromFile("Data/textures/information.png");
@@ -43,14 +46,14 @@ public:
 		nextBlock.erase(nextBlock.begin(), nextBlock.end());
 		for (sf::Vector2i b : newBlocks)
 		{
-			if (_type == 0) nextBlock.push_back(new Block(sf::Vector2i(b.x + 10, b.y + 4.2)));
-			else if (_type == 1) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9.5, b.y + 4.2)));
-			else if (_type == 2) nextBlock.push_back(new Block(sf::Vector2i(b.x + 10, b.y + 3.7)));
-			else if (_type == 3 || _type == 4 || _type == 9 || _type == 10) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9, b.y + 3.7)));
-			else if (_type == 5 || _type == 6 || _type == 7 || _type == 8) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9.5, b.y + 3.2)));
-			else if (_type == 11) nextBlock.push_back(new Block(sf::Vector2i(b.x + 10, b.y + 3)));
-			else if (_type == 12) nextBlock.push_back(new Block(sf::Vector2i(b.x + 8.5, b.y + 4.2)));
-			else if (_type == 13) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9.5, b.y + 3.7)));
+			if (_type == 0) nextBlock.push_back(new Block(sf::Vector2i(b.x + 10, b.y + 4.2), &tex_Block));
+			else if (_type == 1) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9.5, b.y + 4.2), &tex_Block));
+			else if (_type == 2) nextBlock.push_back(new Block(sf::Vector2i(b.x + 10, b.y + 3.7), &tex_Block));
+			else if (_type == 3 || _type == 4 || _type == 9 || _type == 10) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9, b.y + 3.7), &tex_Block));
+			else if (_type == 5 || _type == 6 || _type == 7 || _type == 8) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9.5, b.y + 3.2), &tex_Block));
+			else if (_type == 11) nextBlock.push_back(new Block(sf::Vector2i(b.x + 10, b.y + 3), &tex_Block));
+			else if (_type == 12) nextBlock.push_back(new Block(sf::Vector2i(b.x + 8.5, b.y + 4.2), &tex_Block));
+			else if (_type == 13) nextBlock.push_back(new Block(sf::Vector2i(b.x + 9.5, b.y + 3.7), &tex_Block));
 		}
 
 	}

@@ -1,21 +1,18 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-using namespace std;
+#include "GlobalVariables.h"
 
 class Block
 {
 	sf::Vector2i position;
 	sf::RectangleShape rect;
-	sf::Texture texture;
 
 public:
-	Block(sf::Vector2i _pos)
+	Block(sf::Vector2i _pos, sf::Texture* _tex)
 	{
 		rect.setSize(sf::Vector2f(25, 25));
 		position = _pos;
-		texture.loadFromFile("Data/textures/block_1.png");
 		rect.setPosition(_pos.x * 25 + 1, _pos.y * 25 + 1);
-		rect.setTexture(&texture);
+		rect.setTexture(_tex);
 	}
 
 	void setPosition(sf::Vector2i _pos)
